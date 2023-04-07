@@ -13,42 +13,10 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-void	check_argumets(char **argv)
+void	create_list(t_list	*list, char **argv)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	while (argv[i])
-	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if ((j == 0 && !ft_isdigit(argv[i][j]) && argv[i][j] != '-')
-				|| (j > 0 && !ft_isdigit(argv[i][j])))
-			{
-				write(1, "Error\n", 6);
-				exit(1);
-			}
-			j++;
-		}
-		ft_atoi(argv[i]);
-		i++;
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	int		*n;
-	t_list	*list;
-	t_list	*start;
 	int		i;
 
-	if (argc == 1)
-		exit(1);
-	check_argumets(argv);
-	list = (t_list *)malloc(sizeof(t_list));
-	start = list;
 	list->data = ft_atoi(argv[1]);
 	list->next = 0;
 	list->prev = 0;
@@ -59,11 +27,17 @@ int	main(int argc, char **argv)
 		list = list->next;
 		i++;
 	}
-	// i = 0;
-	// while(start)
-	// {
-	// 	printf("%d\n", start->data);
-	// 	start = start->next;
-	// }
-	
+}
+
+int	main(int argc, char **argv)
+{
+	t_list	*list;
+	t_list	*start;
+
+	if (argc == 1)
+		exit(1);
+	check_argumets(argc, argv);
+	list = (t_list *)malloc(sizeof(t_list));
+	create_list(list, argv);
+	start = list;
 }
