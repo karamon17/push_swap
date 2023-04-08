@@ -18,8 +18,8 @@ void	create_list(t_list	*list, char **argv)
 	int		i;
 
 	list->data = ft_atoi(argv[1]);
-	list->next = 0;
-	list->prev = 0;
+	list->next = NULL;
+	list->prev = NULL;
 	i = 2;
 	while (argv[i])
 	{
@@ -40,4 +40,10 @@ int	main(int argc, char **argv)
 	list = (t_list *)malloc(sizeof(t_list));
 	create_list(list, argv);
 	start = list;
+	list = start;
+	while (list)
+	{
+		printf("%d\n", list->data);
+		list = list->next;
+	}
 }
