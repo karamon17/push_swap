@@ -31,22 +31,21 @@ void	create_list(t_list	*list, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_list	*list;
-	t_list	*start;
+	t_list	*a;
+	t_list	*b;
+	char	*str;
+	char	**arr;
+	int		i;
 
 	if (argc == 1)
 		exit(1);
-	check_argumets(argc, argv);
-	list = (t_list *)malloc(sizeof(t_list));
-	create_list(list, argv);
-	start = list;
-	list = start;
-	while (list)
-	{
-		printf("%d\n", list->data);
-		list = list->next;
-	}
+	i = 1;
+	str = malloc(sizeof(char));
+	str[0] = 0;
+	while( i < argc)
+		str = ft_strjoin(str, argv[i++]);
+	arr = ft_split(str, ' ');
+	check_argumets(argc, arr);
+	//a = (t_list *)malloc(sizeof(t_list));
+	//create_list(a, argv);
 }
-
-
-//

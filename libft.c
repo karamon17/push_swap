@@ -56,3 +56,40 @@ t_list	*ft_lstnew(t_list *list, int data)
 	newnode->next = 0;
 	return (newnode);
 }
+
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*res;
+	int		i;
+	int		j;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	res = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	if (!res)
+		return (0);
+	while (s1[i])
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		res[i++] = s2[j++];
+	res[i] = ' ';
+	res[i + 1] = 0;
+	free((void *)s1);
+	return (res);
+}

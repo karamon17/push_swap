@@ -36,7 +36,7 @@ void	check_sort(int *n, int len)
 	i = 0;
 	while (i < len)
 	{
-		if (i > 0 && n[i] < n[i -1])
+		if (i > 0 && n[i] < n[i - 1])
 			return ;
 		i++;
 	}
@@ -44,21 +44,21 @@ void	check_sort(int *n, int len)
 	exit(0);
 }
 
-void	check_argumets(int argc, char **argv)
+void	check_argumets(int argc, char **arr)
 {
 	int	i;
 	int	j;
 	int	*n;
 
-	i = 1;
 	n = malloc(sizeof(int) * (argc - 1));
-	while (argv[i])
+	i = 0;
+	while (arr[i])
 	{
 		j = 0;
-		while (argv[i][j])
+		while (arr[i][j])
 		{
-			if ((j == 0 && !ft_isdigit(argv[i][j]) && argv[i][j] != '-')
-				|| (j > 0 && !ft_isdigit(argv[i][j])))
+			if ((j == 0 && !ft_isdigit(arr[i][j]) && arr[i][j] != '-')
+				|| (j > 0 && !ft_isdigit(arr[i][j])))
 			{
 				write(1, "Error\n", 6);
 				free(n);
@@ -66,8 +66,8 @@ void	check_argumets(int argc, char **argv)
 			}
 			j++;
 		}
-		n[i - 1] = ft_atoi(argv[i]);
-		check_duplicates(n, n[i - 1], i - 1);
+		n[i] = ft_atoi(arr[i]);
+		check_duplicates(n, n[i], i);
 		i++;
 	}
 	check_sort(n, argc - 1);

@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdio.h>
 
 typedef struct s_list {
 	int				data;
@@ -27,5 +28,7 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int arg);
 t_list	*ft_lstnew(t_list *list, int data);
 void	check_argumets(int argc, char **argv);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	**ft_split(char const *s, char c);
 
 #endif
