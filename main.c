@@ -13,20 +13,27 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-void	create_list(t_list	*list, char **argv)
+void	create_list(t_list	*a, char **arr)
 {
 	int		i;
+	t_list	*cursor;
 
-	list->data = ft_atoi(argv[1]);
-	list->next = NULL;
-	list->prev = NULL;
-	i = 2;
-	while (argv[i])
+	a->data = ft_atoi(arr[0]);
+	a->next = NULL;
+	a->prev = NULL;
+	cursor = a;
+	i = 1;
+	while (arr[i])
 	{
-		list->next = ft_lstnew(list, ft_atoi(argv[i]));
-		list = list->next;
+		cursor->next = ft_lstnew(cursor, ft_atoi(arr[i]), a);
+		cursor = cursor->next;
 		i++;
 	}
+}
+
+void	sorting(t_list	*a, t_list	*b)
+{
+
 }
 
 int	main(int argc, char **argv)
@@ -42,10 +49,21 @@ int	main(int argc, char **argv)
 	i = 1;
 	str = malloc(sizeof(char));
 	str[0] = 0;
-	while( i < argc)
+	while (i < argc)
 		str = ft_strjoin(str, argv[i++]);
 	arr = ft_split(str, ' ');
 	check_argumets(argc, arr);
-	//a = (t_list *)malloc(sizeof(t_list));
-	//create_list(a, argv);
+	a = (t_list *)malloc(sizeof(t_list));
+	create_list(a, arr);
+	b = (t_list *)malloc(sizeof(t_list));
+	//sorting(a, b);
+	// printf("%d это до свапа\n", a->data);
+	// sa(&a);
+	// printf("%d это после свапа\n", a->data);
+	// argc--;
+	// while (argc--)
+	// {
+	// 	printf("%d\n", a->data);
+	// 	a = a->next;
+	// }
 }

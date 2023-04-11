@@ -17,7 +17,7 @@ void	check_duplicates(int *n, int current, int len)
 	int	i;
 
 	i = 0;
-	while (i < len - 1)
+	while (i < len)
 	{
 		if (n[i] == current)
 		{

@@ -44,7 +44,7 @@ int	ft_isdigit(int arg)
 	return (arg >= '0' && arg <= '9');
 }
 
-t_list	*ft_lstnew(t_list *list, int data)
+t_list	*ft_lstnew(t_list *list, int data, t_list *head)
 {
 	t_list	*newnode;
 
@@ -53,10 +53,9 @@ t_list	*ft_lstnew(t_list *list, int data)
 		return (0);
 	newnode->data = data;
 	newnode->prev = list;
-	newnode->next = 0;
+	newnode->next = head;
 	return (newnode);
 }
-
 
 size_t	ft_strlen(const char *str)
 {

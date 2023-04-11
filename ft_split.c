@@ -82,8 +82,6 @@ char	**ft_split(char const *s, char c)
 	j = 0;
 	wc = ft_wordcount(s, c);
 	new = malloc(sizeof(char *) * (wc + 1));
-	if (!new)
-		return (new);
 	while (++i < wc)
 	{
 		while (s[j] && s[j] == c)
