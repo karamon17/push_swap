@@ -12,25 +12,25 @@
 
 #include "push_swap.h"
 
-void	swap(t_list **a)
+void	swap(t_list **stack)
 {
 	t_list	*tmp;
 
-	tmp = (*a)->next;
-	(*a)->next = tmp->next;
+	tmp = (*stack)->next;
+	(*stack)->next = tmp->next;
 	tmp->next->prev = tmp->prev;
-	tmp->next = *a;
-	tmp->prev = (*a)->prev;
-	(*a)->prev->next = tmp;
-	(*a)->prev = tmp;
-	*a = tmp;
+	tmp->next = *stack;
+	tmp->prev = (*stack)->prev;
+	(*stack)->prev->next = tmp;
+	(*stack)->prev = tmp;
+	*stack = tmp;
 }
 
-void	sa_or_sb(t_list **a, int *count)
+void	sa_or_sb(t_list **stack, int *count)
 {
-	if (*a && (*a)->next)
+	if (*stack && (*stack)->next)
 	{
-		swap(a);
+		swap(stack);
 		(*count)++;
 	}
 }
@@ -53,28 +53,33 @@ void	ss(t_list **a, t_list **b, int *count)
 	(*count) += flag;
 }
 
-void	pa(t_list **a, t_list **b, int *count)
+void	pa_or_pb(t_list **in, t_list **out, int *count)
 {
 	t_list	*tmp;
 
-	if (*b)
+	if (*out)
 	{
 		tmp = (t_list *)malloc(sizeof(t_list));
-		tmp->data = (*b)->data;
-		tmp->next = *a;
-		tmp->prev = (*a)->prev;
-		(*a)->prev = tmp;
+		tmp->data = (*out)->data;
+		tmp->next = *in;
+		tmp->prev = (*in)->prev;
+		(*in)->prev = tmp;
 		tmp->prev->next = tmp;
-		*a = tmp;
-		tmp = *b;
+		*in = tmp;
+		tmp = *out;
 		tmp->next->prev = tmp->prev;
 		tmp->prev->next = tmp->next;
-		*b = tmp->next;
+		*out = tmp->next;
 		free(tmp);
+		(*count)++;
 	}
 }
 
-void	pb(t_list **a, t_list **b, int *count)
+void	ra_or_rb(t_list **stack, int *count)
 {
-	
+	if (*stack && (*stack)->next)
+	{
+		*stack = (*stack)->next;
+		(*count)++;
+	}
 }

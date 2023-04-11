@@ -12,8 +12,31 @@
 
 #include "push_swap.h"
 
-void	rrr(t_list **a, t_list **b, int *count)
+int	get_list_length(t_list *head)
 {
-	
+	int		length;
+	t_list	*current;
+
+	length = 1;
+	current = head;
+	if (head == NULL)
+	{
+		return (0);
+	}
+	while (current->next != head)
+	{
+		length++;
+		current = current->next;
+	}
+	return (length);
+}
+
+void	sorting(t_list	**a, t_list	**b)
+{
+	int		length_a;
+	int		length_b;
+
+	length_a = get_list_length(*a);
+	length_b = get_list_length(*b);
 }
 

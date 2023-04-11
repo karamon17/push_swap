@@ -31,11 +31,6 @@ void	create_list(t_list	*a, char **arr)
 	}
 }
 
-void	sorting(t_list	*a, t_list	*b)
-{
-
-}
-
 int	main(int argc, char **argv)
 {
 	t_list	*a;
@@ -56,7 +51,8 @@ int	main(int argc, char **argv)
 	a = (t_list *)malloc(sizeof(t_list));
 	create_list(a, arr);
 	b = (t_list *)malloc(sizeof(t_list));
-	//sorting(a, b);
+	b = (t_list *){0};
+	sorting(&a, &b);
 	// printf("%d это до свапа\n", a->data);
 	// sa(&a);
 	// printf("%d это после свапа\n", a->data);

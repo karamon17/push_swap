@@ -30,16 +30,14 @@ t_list	*ft_lstnew(t_list *list, int data, t_list *head);
 void	check_argumets(int argc, char **argv);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
-void	sa_or_sb(t_list **a, int *count);
+void	sa_or_sb(t_list **stack, int *count);
 void	ss(t_list **a, t_list **b, int *count);
-void	pa(t_list **a, t_list **b, int *count);
-void	pb(t_list **a, t_list **b, int *count);
-void	ra(t_list **a, int *count);
-void	rb(t_list **b, int *count);
+void	pa_or_pb(t_list **in, t_list **out, int *count);
+void	ra_or_rb(t_list **stack, int *count);
 void	rr(t_list **a, t_list **b, int *count);
-void	rra(t_list **a, int *count);
-void	rrb(t_list **b, int *count);
+void	rra_or_rrb(t_list **stack, int *count);
 void	rrr(t_list **a, t_list **b, int *count);
 void	ft_lstadd_front(t_list **lst, t_list *new);
+void	sorting(t_list	**a, t_list	**b);
 
 #endif
