@@ -40,5 +40,6 @@ void	rr(t_list **a, t_list **b, int *count);
 void	rra(t_list **a, int *count);
 void	rrb(t_list **b, int *count);
 void	rrr(t_list **a, t_list **b, int *count);
+void	ft_lstadd_front(t_list **lst, t_list *new);
 
 #endif

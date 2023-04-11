@@ -14,6 +14,8 @@
 
 void	swap(t_list **a)
 {
+	t_list	*tmp;
+
 	tmp = (*a)->next;
 	(*a)->next = tmp->next;
 	tmp->next->prev = tmp->prev;
@@ -26,8 +28,6 @@ void	swap(t_list **a)
 
 void	sa_or_sb(t_list **a, int *count)
 {
-	t_list	*tmp;
-
 	if (*a && (*a)->next)
 	{
 		swap(a);
@@ -37,7 +37,6 @@ void	sa_or_sb(t_list **a, int *count)
 
 void	ss(t_list **a, t_list **b, int *count)
 {
-	t_list	*tmp;
 	int	flag;
 
 	flag = 0;
@@ -56,7 +55,23 @@ void	ss(t_list **a, t_list **b, int *count)
 
 void	pa(t_list **a, t_list **b, int *count)
 {
+	t_list	*tmp;
 
+	if (*b)
+	{
+		tmp = (t_list *)malloc(sizeof(t_list));
+		tmp->data = (*b)->data;
+		tmp->next = *a;
+		tmp->prev = (*a)->prev;
+		(*a)->prev = tmp;
+		tmp->prev->next = tmp;
+		*a = tmp;
+		tmp = *b;
+		tmp->next->prev = tmp->prev;
+		tmp->prev->next = tmp->next;
+		*b = tmp->next;
+		free(tmp);
+	}
 }
 
 void	pb(t_list **a, t_list **b, int *count)
