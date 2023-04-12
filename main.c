@@ -13,22 +13,23 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-void	create_list(t_list	*a, char **arr)
+void	create_list(t_list	**a, char **arr)
 {
 	int		i;
 	t_list	*cursor;
 
-	a->data = ft_atoi(arr[0]);
-	a->next = NULL;
-	a->prev = NULL;
-	cursor = a;
+	*a = ft_lstnew(ft_atoi(arr[0]));
+	cursor = *a;
 	i = 1;
 	while (arr[i])
 	{
-		cursor->next = ft_lstnew(cursor, ft_atoi(arr[i]), a);
+		cursor->next = ft_lstnew(ft_atoi(arr[i]));
+		cursor->next->prev = cursor;
 		cursor = cursor->next;
 		i++;
 	}
+	cursor->next = *a;
+	(*a)->prev = cursor;
 }
 
 int	main(int argc, char **argv)
@@ -49,17 +50,7 @@ int	main(int argc, char **argv)
 	arr = ft_split(str, ' ');
 	check_argumets(argc, arr);
 	a = (t_list *)malloc(sizeof(t_list));
-	create_list(a, arr);
-	b = (t_list *)malloc(sizeof(t_list));
-	b = (t_list *){0};
+	create_list(&a, arr);
+	b = NULL;
 	sorting(&a, &b);
-	// printf("%d это до свапа\n", a->data);
-	// sa(&a);
-	// printf("%d это после свапа\n", a->data);
-	// argc--;
-	// while (argc--)
-	// {
-	// 	printf("%d\n", a->data);
-	// 	a = a->next;
-	// }
 }

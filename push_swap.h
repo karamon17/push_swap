@@ -26,7 +26,7 @@ typedef struct s_list {
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(int arg);
-t_list	*ft_lstnew(t_list *list, int data, t_list *head);
+t_list	*ft_lstnew(int data);
 void	check_argumets(int argc, char **argv);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);

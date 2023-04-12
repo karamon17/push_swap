@@ -35,8 +35,22 @@ void	sorting(t_list	**a, t_list	**b)
 {
 	int		length_a;
 	int		length_b;
+	int		count;
 
-	length_a = get_list_length(*a);
-	length_b = get_list_length(*b);
+	count = 0;
+	// printf("%d это а\n", get_list_length(*a));
+	// printf("%d это b\n", get_list_length(*b));
+	//length_b = get_list_length(*b);
+	if (get_list_length(*a) > 5)
+	{
+		pa_or_pb(a, b, &count);
+	}
+	printf("%d\n", count);
+	printf("%d это а\n", get_list_length(*a));
+	printf("%d это b\n", get_list_length(*b));
+	//printf("%d", (*b)->data);
+	// while(get_list_length(*a) > 3)
+	// {
+
+	// }
 }
-

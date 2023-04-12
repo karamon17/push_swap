@@ -53,26 +53,48 @@ void	ss(t_list **a, t_list **b, int *count)
 	(*count) += flag;
 }
 
-void	pa_or_pb(t_list **in, t_list **out, int *count)
+void	pa_or_pb(t_list **from, t_list **to, int *count)
 {
 	t_list	*tmp;
 
-	if (*out)
+	 if (*from == NULL)
+        return;
+
+	if (*to && (*to)->next)
 	{
-		tmp = (t_list *)malloc(sizeof(t_list));
-		tmp->data = (*out)->data;
-		tmp->next = *in;
-		tmp->prev = (*in)->prev;
-		(*in)->prev = tmp;
-		tmp->prev->next = tmp;
-		*in = tmp;
-		tmp = *out;
-		tmp->next->prev = tmp->prev;
-		tmp->prev->next = tmp->next;
-		*out = tmp->next;
-		free(tmp);
-		(*count)++;
+		tmp = (*from);
+		(*from)->next->prev = (*from)->prev;
+		(*from)->prev->next = (*from)->next;
+		(*from) = (*from)->next;
+		(*to)->prev->next = tmp;
+		tmp->prev = (*to)->prev;
+		(*to)->prev = tmp;
+		tmp->next = (*to);
+		(*to) = tmp;
 	}
+	else if (*to)
+	{
+		tmp = (*from);
+		(*from)->next->prev = (*from)->prev;
+		(*from)->prev->next = (*from)->next;
+		(*from) = (*from)->next;
+		(*to)->prev = tmp;
+		tmp->next = (*to);
+		(*to)->next = tmp;
+		tmp->prev = (*to);
+		(*to) = tmp;
+	}
+	else
+	{
+		tmp = (*from);
+		(*from)->next->prev = (*from)->prev;
+		(*from)->prev->next = (*from)->next;
+		(*from) = (*from)->next;
+		(*to) = tmp;
+		(*to)->prev = tmp;
+		(*to)->next = tmp;
+	}
+	(*count)++;
 }
 
 void	ra_or_rb(t_list **stack, int *count)
