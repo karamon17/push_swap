@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+void	ra_or_rb(t_list **stack, int *count)
+{
+	if (*stack && (*stack)->next)
+	{
+		*stack = (*stack)->next;
+		(*count)++;
+	}
+}
+
 void	rr(t_list **a, t_list **b, int *count)
 {
 	int	flag;

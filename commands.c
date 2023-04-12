@@ -53,14 +53,43 @@ void	ss(t_list **a, t_list **b, int *count)
 	(*count) += flag;
 }
 
+void	push(t_list **from, t_list **to, t_list **tmp)
+{
+	if (*to)
+	{
+		*tmp = (*from);
+		(*from)->next->prev = (*from)->prev;
+		(*from)->prev->next = (*from)->next;
+		(*from) = (*from)->next;
+		(*to)->prev = *tmp;
+		(*tmp)->next = (*to);
+		(*to)->next = *tmp;
+		(*tmp)->prev = (*to);
+		(*to) = *tmp;
+	}
+	else
+	{
+		*tmp = (*from);
+		(*from)->next->prev = (*from)->prev;
+		(*from)->prev->next = (*from)->next;
+		(*from) = (*from)->next;
+		(*to) = *tmp;
+		(*to)->prev = *tmp;
+		(*to)->next = *tmp;
+	}
+}
+
 void	pa_or_pb(t_list **from, t_list **to, int *count)
 {
 	t_list	*tmp;
 
-	 if (*from == NULL)
-        return;
-
-	if (*to && (*to)->next)
+	if (*from == NULL)
+		return ;
+	if (*from && (*from)->next == *from)
+	{
+		
+	}
+	if (*to && (*to)->next != (*to))
 	{
 		tmp = (*from);
 		(*from)->next->prev = (*from)->prev;
@@ -71,37 +100,9 @@ void	pa_or_pb(t_list **from, t_list **to, int *count)
 		(*to)->prev = tmp;
 		tmp->next = (*to);
 		(*to) = tmp;
-	}
-	else if (*to)
-	{
-		tmp = (*from);
-		(*from)->next->prev = (*from)->prev;
-		(*from)->prev->next = (*from)->next;
-		(*from) = (*from)->next;
-		(*to)->prev = tmp;
-		tmp->next = (*to);
-		(*to)->next = tmp;
-		tmp->prev = (*to);
-		(*to) = tmp;
-	}
-	else
-	{
-		tmp = (*from);
-		(*from)->next->prev = (*from)->prev;
-		(*from)->prev->next = (*from)->next;
-		(*from) = (*from)->next;
-		(*to) = tmp;
-		(*to)->prev = tmp;
-		(*to)->next = tmp;
-	}
-	(*count)++;
-}
-
-void	ra_or_rb(t_list **stack, int *count)
-{
-	if (*stack && (*stack)->next)
-	{
-		*stack = (*stack)->next;
 		(*count)++;
+		return ;
 	}
+	push(from, to, &tmp);
+	(*count)++;
 }
