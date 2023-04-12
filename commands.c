@@ -87,7 +87,15 @@ void	pa_or_pb(t_list **from, t_list **to, int *count)
 		return ;
 	if (*from && (*from)->next == *from)
 	{
-		
+		tmp = (*from);
+		(*to)->prev->next = tmp;
+		tmp->prev = (*to)->prev;
+		(*to)->prev = tmp;
+		tmp->next = (*to);
+		(*to) = tmp;
+		(*from) = NULL;
+		(*count)++;
+		return ;
 	}
 	if (*to && (*to)->next != (*to))
 	{
