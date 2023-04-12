@@ -36,7 +36,7 @@ void	rra_or_rrb(t_list **stack, int *count)
 {
 	if (*stack && (*stack)->prev)
 	{
-		*stack = (*stack)->next;
+		*stack = (*stack)->prev;
 		(*count)++;
 	}
 }
@@ -46,13 +46,13 @@ void	rrr(t_list **a, t_list **b, int *count)
 	int	flag;
 
 	flag = 0;
-	if (*a && (*a)->next)
+	if (*a && (*a)->prev)
 	{
 		rra_or_rrb(a, count);
 		count--;
 		flag = 1;
 	}
-	if (*b && (*b)->next)
+	if (*b && (*b)->prev)
 	{
 		rra_or_rrb(b, count);
 		count--;
