@@ -33,7 +33,7 @@ int	get_list_length(t_list *head)
 
 int	find_max(t_list *head)
 {
-	int 	max;
+	int		max;
 	t_list	*current;
 
 	current = head;
@@ -51,7 +51,7 @@ int	find_max(t_list *head)
 
 int	find_min(t_list *head)
 {
-	int 	min;
+	int		min;
 	t_list	*current;
 
 	current = head;
@@ -69,19 +69,22 @@ int	find_min(t_list *head)
 
 void	sort_three(t_list	**a, int *count)
 {
-	if ((*a)->data > (*a)->next->data && (*a)->next->data > (*a)->next->next->data)
+	if ((*a)->data > (*a)->next->data && \
+		(*a)->next->data > (*a)->next->next->data)
 	{
 		sa_or_sb(a, count);
 		rra_or_rrb(a, count);
 	}
-	else if ((*a)->data < (*a)->next->data && (*a)->next->next->data < (*a)->data)
+	else if ((*a)->data < (*a)->next->data && \
+		(*a)->next->next->data < (*a)->data)
 		rra_or_rrb(a, count);
 	else if ((*a)->data < (*a)->next->data)
 	{
 		sa_or_sb(a, count);
 		ra_or_rb(a, count);
 	}
-	else if ((*a)->data > (*a)->next->data && (*a)->next->data < (*a)->next->next->data)
+	else if ((*a)->data > (*a)->next->data && \
+		(*a)->next->data < (*a)->next->next->data)
 	{
 		sa_or_sb(a, count);
 	}
