@@ -29,13 +29,13 @@ void	rr(t_list **a, t_list **b, int *count)
 	if (*a && (*a)->next)
 	{
 		ra_or_rb(a, count);
-		count--;
+		(*count)--;
 		flag = 1;
 	}
 	if (*b && (*b)->next)
 	{
 		ra_or_rb(b, count);
-		count--;
+		(*count)--;
 		flag = 1;
 	}
 	(*count) += flag;
