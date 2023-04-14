@@ -89,3 +89,17 @@ void	sort_three(t_list	**a, int *count)
 		ra_or_rb(a, count);
 	}
 }
+
+int	check_sort_stack(t_list	**a)
+{
+	t_list	*current;
+
+	current = *a;
+	while (current->next != *a)
+	{
+		if (current->data > current->next->data)
+			return (0);
+		current = current->next;
+	}
+	return (1);
+}

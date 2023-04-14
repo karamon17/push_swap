@@ -42,5 +42,6 @@ int		get_list_length(t_list *head);
 int		find_max(t_list *head);
 int		find_min(t_list *head);
 void	sort_three(t_list	**a, int *count);
+int		check_sort_stack(t_list	**a);
 
 #endif
