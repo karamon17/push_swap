@@ -39,7 +39,7 @@ void	rra_or_rrb(t_list **stack, int *count);
 void	rrr(t_list **a, t_list **b, int *count);
 void	sorting(t_list	**a, t_list	**b);
 int		get_list_length(t_list *head);
-int		find_max(t_list *head);
+int	find_max(t_list *head);
 int		find_min(t_list *head);
 void	sort_three(t_list	**a, int *count);
 int		check_sort_stack(t_list	**a);

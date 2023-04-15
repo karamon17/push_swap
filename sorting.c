@@ -34,7 +34,7 @@ int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 	i = 1;
 	current_b = *b;
 	current_a = *a;
-	*min_score = 0;
+	*min_score = -1;
 	while (get_list_length(*a) - i >= 0)
 	{
 		score = 0;
@@ -45,7 +45,7 @@ int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 				current_b = current_b->next;
 				score++;
 			}
-			if (*min_score > score || *min_score == 0)
+			if (*min_score > score || *min_score == -1)
 			{
 				*min_score = score;
 				index = i;
@@ -59,7 +59,7 @@ int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 				current_b = current_b->next;
 				score++;
 			}
-			if (*min_score > score || *min_score == 0)
+			if (*min_score > score || *min_score == -1)
 			{
 				*min_score = score;
 				index = i;
@@ -207,6 +207,15 @@ void	sorting(t_list	**a, t_list	**b)
 	while ((*a)->data != find_min(*a))
 		ra_or_rb(a, &count);
 	printf("%d это кол-во операций\n", count);
+
+	t_list	*current;
+		current = *a;
+	while (current->next != *a)
+	{
+		printf("%d\n", current->data);
+		current = current->next;
+	}
+	printf("%d\n", current->data);
 }
 
 
@@ -243,3 +252,4 @@ void	sorting(t_list	**a, t_list	**b)
 	// 	printf("%d\n", current->data);
 	// 	current = current->next;
 	// }
+	//printf("%d\n", current->data);

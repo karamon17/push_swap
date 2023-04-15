@@ -78,16 +78,19 @@ void	sort_three(t_list	**a, int *count)
 	else if ((*a)->data < (*a)->next->data && \
 		(*a)->next->next->data < (*a)->data)
 		rra_or_rrb(a, count);
-	else if ((*a)->data < (*a)->next->data)
+	else if ((*a)->data < (*a)->next->data && \
+		(*a)->next->data > (*a)->next->next->data)
 	{
 		sa_or_sb(a, count);
 		ra_or_rb(a, count);
 	}
 	else if ((*a)->data > (*a)->next->data && \
+		(*a)->next->data < (*a)->next->next->data && \
+		(*a)->data < (*a)->next->next->data)
+		sa_or_sb(a, count);
+	else if ((*a)->data > (*a)->next->data && \
 		(*a)->next->data < (*a)->next->next->data)
-	{
 		ra_or_rb(a, count);
-	}
 }
 
 int	check_sort_stack(t_list	**a)

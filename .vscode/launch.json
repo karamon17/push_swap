@@ -1,13 +1,15 @@
 {
   "version": "0.2.0",
   "configurations": [
+
+
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
-      "args": [],
+      "args": ["3", "2", "1"],
       "cwd": "/Users/gkhaishb/Desktop/push_swap",
-      "program": "/Users/gkhaishb/Desktop/push_swap/build/Debug/outDebug"
+      "program": "/Users/gkhaishb/Desktop/push_swap/a.out"
     }
   ]
 }
