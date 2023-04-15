@@ -23,26 +23,53 @@ void	push_2to_b(t_list	**a, t_list	**b, int *count)
 		pa_or_pb(a, b, count);
 }
 
+int	find_index(t_list *stack, int num)
+{
+	int index;
+
+	index = 0;
+	while (stack->data != num)
+	{
+		stack = stack->next;
+		index++;
+	}
+	return (index);
+}
+
 int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 {
 	int	score;
 	int	i;
+	int	j;
 	int	index;
 	t_list	*current_b;
 	t_list	*current_a;
 	
-	i = 1;
-	current_b = *b;
-	current_a = *a;
+	i = 0;
 	*min_score = -1;
-	while (get_list_length(*a) - i >= 0)
+	while (get_list_length(*a) - i > 0)
 	{
 		score = 0;
+		current_a = *a;
+		current_b = *b;
+		j = i;
+		if (j > get_list_length(*a) / 2)
+			score = get_list_length(*a) - j;
+		else
+			score = j;
+		while (j)
+		{
+			current_a = current_a->next;
+			j--;
+		}
 		if (current_a->data > find_max(*b) || current_a->data < find_min(*b)) //если верхнее число в *a больше или меньше макс/мин в *b, то его надо поместить над макс
 		{
 			while (current_b->data != find_max(*b)) //крутим *b пока там вверху не станет макс
 			{	
-				current_b = current_b->next;
+				if (find_index(*b, find_max(*b)) < get_list_length(*b) / 2)
+					current_b = current_b->next;
+				else
+					current_b = current_b->prev;
 				score++;
 			}
 			if (*min_score > score || *min_score == -1)
@@ -67,7 +94,8 @@ int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 			}
 		}
 		i++;
-		current_a = current_a->next;
+		if (*min_score == 0 || *min_score == 1)
+			break;
 	}
 	return (index);
 }
@@ -89,7 +117,12 @@ void	rotate_rr_push(t_list	**a, t_list	**b, int *count, int num)
 		else if((*b)->data != find_max(*b) && (*a)->data == num) //и наоборот
 		{
 			while((*b)->data != find_max(*b))
-				ra_or_rb(b, count);
+			{
+				if (find_index(*b, find_max(*b)) < get_list_length(*b) / 2)
+					ra_or_rb(b, count);
+				else
+					rra_or_rrb(b, count);
+			}
 			pa_or_pb(a, b, count);
 		}
 	}
@@ -106,7 +139,12 @@ void	rotate_rr_push(t_list	**a, t_list	**b, int *count, int num)
 		else if((*a)->data != num)
 		{
 			while ((*a)->data != num)
-				ra_or_rb(a, count);
+			{
+				if (find_index(*a, num) < get_list_length(*a) / 2)
+					ra_or_rb(a, count);
+				else
+					rra_or_rrb(a, count);
+			}
 			pa_or_pb(a, b, count); //пушим из *a в *b
 		}
 	}
@@ -129,7 +167,12 @@ void	rotate_rrr_push(t_list	**a, t_list	**b, int *count, int num)
 		else if((*b)->data != find_max(*b) && (*a)->data == num) //и наоборот
 		{
 			while((*b)->data != find_max(*b))
-				rra_or_rrb(b, count);
+			{
+				if (find_index(*b, find_max(*b)) < get_list_length(*b) / 2)
+					ra_or_rb(b, count);
+				else
+					rra_or_rrb(b, count);
+			}
 			pa_or_pb(a, b, count);
 		}
 	}
@@ -201,21 +244,17 @@ void	sorting(t_list	**a, t_list	**b)
 	count = 0;
 	push_2to_b(a, b, &count);
 	push_allto_b(a, b, &count);
-	if (get_list_length(*a) == 3)
+	if (get_list_length(*a) == 3 && !check_sort_stack(a))
 		sort_three(a, &count);
 	push_backto_a(a, b, &count);
 	while ((*a)->data != find_min(*a))
-		ra_or_rb(a, &count);
-	printf("%d это кол-во операций\n", count);
-
-	t_list	*current;
-		current = *a;
-	while (current->next != *a)
 	{
-		printf("%d\n", current->data);
-		current = current->next;
+		if (find_index(*a, find_min(*a)) < get_list_length(*a) / 2)
+			ra_or_rb(a, &count);
+		else
+			rra_or_rrb(a, &count);
 	}
-	printf("%d\n", current->data);
+	printf("%d это кол-во операций\n", count);
 }
 
 

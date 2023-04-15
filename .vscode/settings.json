@@ -37,6 +37,11 @@
   "files.associations": {
 	"chrono": "c",
 	"algorithm": "c",
-	"random": "c"
+	"random": "c",
+	"iterator": "c",
+	"__bit_reference": "c",
+	"bitset": "c",
+	"map": "c",
+	"unordered_map": "c"
 }
 }
