@@ -36,12 +36,30 @@ int	find_index(t_list *stack, int num)
 	return (index);
 }
 
-int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
+int	find_nearest(t_list *head, int num)
+{
+	t_list	*current;
+
+	while(1)
+	{
+		num--;
+		current = head;
+		while(current->next != head)
+		{	
+			if (current->data == num)
+				return (num);
+			current = current->next;
+		}
+		if (current->data == num)
+			return (num);
+	}
+}
+
+void	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 {
 	int	score;
 	int	i;
 	int	j;
-	int	index;
 	t_list	*current_b;
 	t_list	*current_a;
 	
@@ -75,7 +93,6 @@ int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 			if (*min_score > score || *min_score == -1)
 			{
 				*min_score = score;
-				index = i;
 				*num = current_a->data;
 			}
 		}
@@ -83,13 +100,15 @@ int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 		{
 			while (!(current_a->data > current_b->data && current_a->data < current_b->prev->data)) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
 			{	
-				current_b = current_b->next;
+				if (find_index(*b, find_nearest(*b, current_a->data)) < get_list_length(*b) / 2)
+					current_b = current_b->next;
+				else
+					current_b = current_b->prev;
 				score++;
 			}
 			if (*min_score > score || *min_score == -1)
 			{
 				*min_score = score;
-				index = i;
 				*num = current_a->data;
 			}
 		}
@@ -97,21 +116,30 @@ int	find_min_score(t_list **a, t_list **b, int *count, int *min_score, int *num)
 		if (*min_score == 0 || *min_score == 1)
 			break;
 	}
-	return (index);
 }
 
-void	rotate_rr_push(t_list	**a, t_list	**b, int *count, int num)
+void	rotate_push(t_list	**a, t_list	**b, int *count, int num)
 {
 	if (num > find_max(*b) || num < find_min(*b)) //если нужное число в *a больше или меньше макс/мин в *b, то его надо поместить над макс
 	{
 		while ((*b)->data != find_max(*b) && (*a)->data != num) //крутим *b и *a пока там вверху не станет макс и num
-			rr(a, b, count);
+		{	
+			if (find_index(*a, num) < get_list_length(*a) / 2)
+				rr(a, b, count);
+			else
+				rrr(a, b, count);
+		}
 		if ((*b)->data == find_max(*b) && (*a)->data == num)
 			pa_or_pb(a, b, count); //пушим из *a в *b
 		else if((*b)->data == find_max(*b) && (*a)->data != num) //если b докрутили до нужного места, то продолжаем крутить только a
 		{
 			while((*a)->data != num)
-				ra_or_rb(a, count);
+			{	
+				if (find_index(*a, num) < get_list_length(*a) / 2)
+					ra_or_rb(a, count);
+				else
+					rra_or_rrb(a, count);
+			}
 			pa_or_pb(a, b, count);
 		}
 		else if((*b)->data != find_max(*b) && (*a)->data == num) //и наоборот
@@ -129,11 +157,21 @@ void	rotate_rr_push(t_list	**a, t_list	**b, int *count, int num)
 	else //если нужное число в *a не больше и не меньше макс/мин в *b, значит его надо вставить куда-то внутрь *b
 	{
 		while (!(num > (*b)->data && num < (*b)->prev->data) && (*a)->data != num) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
-			rr(a, b, count);
+		{
+			if (find_index(*a, num) < get_list_length(*a) / 2)
+				rr(a, b, count);
+			else
+				rrr(a, b, count);
+		}
 		if((*a)->data == num)
 		{
 			while (!(num > (*b)->data && num < (*b)->prev->data)) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
-				ra_or_rb(b, count);
+			{	
+				if (find_index(*b, find_nearest(*b, num)) < get_list_length(*b) / 2)
+					ra_or_rb(b, count);
+				else
+					rra_or_rrb(b, count);
+			}
 			pa_or_pb(a, b, count);
 		}
 		else if((*a)->data != num)
@@ -150,69 +188,16 @@ void	rotate_rr_push(t_list	**a, t_list	**b, int *count, int num)
 	}
 }
 
-void	rotate_rrr_push(t_list	**a, t_list	**b, int *count, int num)
-{
-	if (num > find_max(*b) || num < find_min(*b)) //если нужное число в *a больше или меньше макс/мин в *b, то его надо поместить над макс
-	{
-		while ((*b)->data != find_max(*b) && (*a)->data != num) //крутим *b и *a пока там вверху не станет макс и num
-			rrr(a, b, count);
-		if ((*b)->data == find_max(*b) && (*a)->data == num)
-			pa_or_pb(a, b, count); //пушим из *a в *b
-		else if((*b)->data == find_max(*b) && (*a)->data != num) //если b докрутили до нужного места, то продолжаем крутить только a
-		{
-			while((*a)->data != num)
-				rra_or_rrb(a, count);
-			pa_or_pb(a, b, count);
-		}
-		else if((*b)->data != find_max(*b) && (*a)->data == num) //и наоборот
-		{
-			while((*b)->data != find_max(*b))
-			{
-				if (find_index(*b, find_max(*b)) < get_list_length(*b) / 2)
-					ra_or_rb(b, count);
-				else
-					rra_or_rrb(b, count);
-			}
-			pa_or_pb(a, b, count);
-		}
-	}
-	else //если нужное число в *a не больше и не меньше макс/мин в *b, значит его надо вставить куда-то внутрь *b
-	{
-		while (!(num > (*b)->data && num < (*b)->prev->data) && (*a)->data != num) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
-			rrr(a, b, count);
-		if((*a)->data == num)
-		{
-			while (!(num > (*b)->data && num < (*b)->prev->data)) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
-				rra_or_rrb(b, count);
-			pa_or_pb(a, b, count);
-		}
-		else if((*a)->data != num)
-		{
-			while ((*a)->data != num)
-				rra_or_rrb(a, count);
-			pa_or_pb(a, b, count); //пушим из *a в *b
-		}
-	}
-}
-
 void	push_allto_b(t_list	**a, t_list	**b, int *count)
 {
 	int min_score;
 	int	num;
-	int index;
 
 	min_score = 0;
 	while (get_list_length(*a) > 3)
 	{
-		index = find_min_score(a, b, count, &min_score, &num);
-		if (get_list_length(*a) / 2 > index)
-		{	
-			rotate_rr_push(a, b, count, num);
-		}
-		else
-		{
-			rotate_rrr_push(a, b, count, num);
-		}
+		find_min_score(a, b, count, &min_score, &num);
+		rotate_push(a, b, count, num);
 		if (check_sort_stack(a))
 			return ;
 	}
