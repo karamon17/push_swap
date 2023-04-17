@@ -56,7 +56,7 @@ void	push2(t_list **from, t_list **to, t_list **tmp)
 	}
 }
 
-void	pa_or_pb(t_list **from, t_list **to, int *count)
+void	pa_or_pb(t_list **from, t_list **to)
 {
 	t_list	*tmp;
 
@@ -71,14 +71,9 @@ void	pa_or_pb(t_list **from, t_list **to, int *count)
 		tmp->next = (*to);
 		(*to) = tmp;
 		(*from) = NULL;
-		(*count)++;
 		return ;
 	}
 	if (push1(from, to, &tmp))
-	{
-		(*count)++;
 		return ;
-	}
 	push2(from, to, &tmp);
-	(*count)++;
 }

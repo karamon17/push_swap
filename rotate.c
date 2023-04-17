@@ -12,62 +12,32 @@
 
 #include "push_swap.h"
 
-void	ra_or_rb(t_list **stack, int *count)
+void	ra_or_rb(t_list **stack)
 {
 	if (*stack && (*stack)->next)
-	{
 		*stack = (*stack)->next;
-		(*count)++;
-	}
 }
 
-void	rr(t_list **a, t_list **b, int *count)
+void	rr(t_list **a, t_list **b)
 {
-	int	flag;
-
-	flag = 0;
 	if (*a && (*a)->next)
-	{
-		ra_or_rb(a, count);
-		(*count)--;
-		flag = 1;
-	}
+		ra_or_rb(a);
 	if (*b && (*b)->next)
-	{
-		ra_or_rb(b, count);
-		(*count)--;
-		flag = 1;
-	}
-	(*count) += flag;
+		ra_or_rb(b);
 	write(1, "rr\n", 3);
 }
 
-void	rra_or_rrb(t_list **stack, int *count)
+void	rra_or_rrb(t_list **stack)
 {
 	if (*stack && (*stack)->prev)
-	{
 		*stack = (*stack)->prev;
-		(*count)++;
-	}
 }
 
-void	rrr(t_list **a, t_list **b, int *count)
+void	rrr(t_list **a, t_list **b)
 {
-	int	flag;
-
-	flag = 0;
 	if (*a && (*a)->prev)
-	{
-		rra_or_rrb(a, count);
-		count--;
-		flag = 1;
-	}
+		rra_or_rrb(a);
 	if (*b && (*b)->prev)
-	{
-		rra_or_rrb(b, count);
-		count--;
-		flag = 1;
-	}
-	(*count) += flag;
+		rra_or_rrb(b);
 	write(1, "rrr\n", 4);
 }

@@ -26,29 +26,16 @@ void	swap(t_list **stack)
 	*stack = tmp;
 }
 
-void	sa_or_sb(t_list **stack, int *count)
+void	sa_or_sb(t_list **stack)
 {
 	if (*stack && (*stack)->next)
-	{
 		swap(stack);
-		(*count)++;
-	}
 }
 
-void	ss(t_list **a, t_list **b, int *count)
+void	ss(t_list **a, t_list **b)
 {
-	int	flag;
-
-	flag = 0;
 	if (*a && (*a)->next)
-	{
 		swap(a);
-		flag = 1;
-	}
 	if (*b && (*b)->next)
-	{
 		swap(b);
-		flag = 1;
-	}
-	(*count) += flag;
 }

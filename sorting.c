@@ -12,18 +12,18 @@
 
 #include "push_swap.h"
 
-void	push_2to_b(t_list	**a, t_list	**b, int *count)
+void	push_2to_b(t_list	**a, t_list	**b)
 {
 	if (get_list_length(*a) >= 5)
 	{
-		pa_or_pb(a, b, count);
-		pa_or_pb(a, b, count);
+		pa_or_pb(a, b);
+		pa_or_pb(a, b);
 		write(1, "pb\n", 3);
 		write(1, "pb\n", 3);
 	}
 	else if (get_list_length(*a) >= 4)
 	{	
-		pa_or_pb(a, b, count);
+		pa_or_pb(a, b);
 		write(1, "pb\n", 3);
 	}
 }
@@ -131,26 +131,26 @@ void	find_min_score(t_list *a, t_list *b, int *num)
 	}
 }
 
-void	rotate_push(t_list	**a, t_list	**b, int *count, int num)
+void	rotate_push(t_list	**a, t_list	**b, int num)
 {
 	if (num > find_max(*b) || num < find_min(*b)) //если нужное число в *a больше или меньше макс/мин в *b, то его надо поместить над макс
 	{
 		while ((*b)->data != find_max(*b) && (*a)->data != num) //крутим *b и *a пока там вверху не станет макс и num
 			if (find_index(*a, num) < get_list_length(*a) / 2)
-				rr(a, b, count);
+				rr(a, b);
 			else
-				rrr(a, b, count);
+				rrr(a, b);
 		if((*b)->data == find_max(*b) && (*a)->data != num) //если b докрутили до нужного места, то продолжаем крутить только a
 			while((*a)->data != num)
 			{	
 				if (find_index(*a, num) < get_list_length(*a) / 2)
 				{
-					ra_or_rb(a, count);
+					ra_or_rb(a);
 					write(1, "ra\n", 3);
 				}
 				else
 				{	
-					rra_or_rrb(a, count);
+					rra_or_rrb(a);
 					write(1, "rra\n", 4);
 				}
 			}
@@ -159,37 +159,37 @@ void	rotate_push(t_list	**a, t_list	**b, int *count, int num)
 			{
 				if (find_index(*b, find_max(*b)) < get_list_length(*b) / 2)
 				{	
-					ra_or_rb(b, count);
+					ra_or_rb(b);
 					write(1, "rb\n", 3);
 				}
 				else
 				{
-					rra_or_rrb(b, count);
+					rra_or_rrb(b);
 					write(1, "rrb\n", 4);
 				}
 			}
-		pa_or_pb(a, b, count);
+		pa_or_pb(a, b);
 		write(1, "pb\n", 3);
 	}
 	else //если нужное число в *a не больше и не меньше макс/мин в *b, значит его надо вставить куда-то внутрь *b
 	{
 		while (!(num > (*b)->data && num < (*b)->prev->data) && (*a)->data != num) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
 			if (find_index(*a, num) < get_list_length(*a) / 2)
-				rr(a, b, count);
+				rr(a, b);
 			else
-				rrr(a, b, count);
+				rrr(a, b);
 		if((*a)->data == num)
 		{
 			while (!(num > (*b)->data && num < (*b)->prev->data)) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
 			{	
 				if (find_index(*b, find_nearest(*b, num)) < get_list_length(*b) / 2)
 				{	
-					ra_or_rb(b, count);
+					ra_or_rb(b);
 					write(1, "rb\n", 3);
 				}
 				else
 				{
-					rra_or_rrb(b, count);
+					rra_or_rrb(b);
 					write(1, "rrb\n", 4);
 				}
 			}
@@ -200,37 +200,37 @@ void	rotate_push(t_list	**a, t_list	**b, int *count, int num)
 			{
 				if (find_index(*a, num) < get_list_length(*a) / 2)
 				{	
-					ra_or_rb(a, count);
+					ra_or_rb(a);
 					write(1, "ra\n", 3);
 				}
 				else
 				{
-					rra_or_rrb(a, count);
+					rra_or_rrb(a);
 					write(1, "rra\n", 4);
 				}
 			}
 		}
-		pa_or_pb(a, b, count);
+		pa_or_pb(a, b);
 		write(1, "pb\n", 3);
 	}
 }
 
-void	push_allto_b(t_list	**a, t_list	**b, int *count)
+void	push_allto_b(t_list	**a, t_list	**b)
 {
 	int	num;
 
 	while (get_list_length(*a) > 3)
 	{
 		find_min_score(*a, *b, &num);
-		rotate_push(a, b, count, num);
+		rotate_push(a, b, num);
 		if (check_sort_stack(a))
 			return ;
 	}
 	if (get_list_length(*a) == 3 && !check_sort_stack(a))
-		sort_three(a, count);
+		sort_three(a);
 }
 
-void	push_backto_a(t_list	**a, t_list	**b, int *count)
+void	push_backto_a(t_list	**a, t_list	**b)
 {
 	while (*b)
 	{
@@ -239,12 +239,12 @@ void	push_backto_a(t_list	**a, t_list	**b, int *count)
 			{
 				if (find_index(*a, find_min(*a)) < get_list_length(*a) / 2)
 				{	
-					ra_or_rb(a, count);
+					ra_or_rb(a);
 					write(1, "ra\n", 3);
 				}
 				else
 				{	
-					rra_or_rrb(a, count);
+					rra_or_rrb(a);
 					write(1, "rra\n", 4);
 				}
 			}
@@ -253,49 +253,36 @@ void	push_backto_a(t_list	**a, t_list	**b, int *count)
 			{	
 				if (find_index(*a, find_nearest(*a, (*b)->data)) < get_list_length(*a) / 2)
 				{	
-					ra_or_rb(a, count);
+					ra_or_rb(a);
 					write(1, "ra\n", 3);
 				}
 				else
 				{	
-					rra_or_rrb(a, count);
+					rra_or_rrb(a);
 					write(1, "rra\n", 4);
 				}
 			}
-		pa_or_pb(b, a, count);
+		pa_or_pb(b, a);
 		write(1, "pa\n", 3);
 	}
 }
 
 void	sorting(t_list	**a, t_list	**b)
 {
-	int		count;
-
-	count = 0;
-	push_2to_b(a, b, &count);
-	push_allto_b(a, b, &count);
-	push_backto_a(a, b, &count);
+	push_2to_b(a, b);
+	push_allto_b(a, b);
+	push_backto_a(a, b);
 	while ((*a)->data != find_min(*a))
 	{
 		if (find_index(*a, find_min(*a)) < get_list_length(*a) / 2)
 		{	
-			ra_or_rb(a, &count);
+			ra_or_rb(a);
 			write(1, "ra\n", 3);
 		}
 		else
 		{	
-			rra_or_rrb(a, &count);
+			rra_or_rrb(a);
 			write(1, "rra\n", 4);
 		}
 	}
-	//printf("%d это кол-во операций\n", count);
 }
-
-	// t_list	*current;
-	// current = *a;
-	// while (current->next != *a)
-	// {
-	// 	printf("%d\n", current->data);
-	// 	current = current->next;
-	// }
-	//printf("%d\n", current->data);
