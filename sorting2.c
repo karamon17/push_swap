@@ -72,38 +72,25 @@ void	sort_three(t_list	**a)
 	if ((*a)->data > (*a)->next->data && \
 		(*a)->next->data > (*a)->next->next->data)
 	{
-		sa_or_sb(a);
-		write(1, "sa\n", 3);
-		rra_or_rrb(a);
-		write(1, "rra\n", 4);
+		sa_or_sb(a, "sa\n");
+		rra_or_rrb(a, "rra\n");
 	}
 	else if ((*a)->data < (*a)->next->data && \
 		(*a)->next->next->data < (*a)->data)
-	{	
-		rra_or_rrb(a);
-		write(1, "rra\n", 4);
-	}
+		rra_or_rrb(a, "rra\n");
 	else if ((*a)->data < (*a)->next->data && \
 		(*a)->next->data > (*a)->next->next->data)
 	{
-		sa_or_sb(a);
-		write(1, "sa\n", 3);
-		ra_or_rb(a);
-		write(1, "ra\n", 3);
+		sa_or_sb(a, "sa\n");
+		ra_or_rb(a, "ra\n");
 	}
 	else if ((*a)->data > (*a)->next->data && \
 		(*a)->next->data < (*a)->next->next->data && \
 		(*a)->data < (*a)->next->next->data)
-	{	
-		sa_or_sb(a);
-		write(1, "sa\n", 3);
-	}
+		sa_or_sb(a, "sa\n");
 	else if ((*a)->data > (*a)->next->data && \
 		(*a)->next->data < (*a)->next->next->data)
-	{	
-		ra_or_rb(a);
-		write(1, "ra\n", 3);
-	}
+		ra_or_rb(a, "ra\n");
 }
 
 int	check_sort_stack(t_list	**a)

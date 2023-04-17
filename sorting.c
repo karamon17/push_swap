@@ -12,53 +12,7 @@
 
 #include "push_swap.h"
 
-void	push_2to_b(t_list	**a, t_list	**b)
-{
-	if (get_list_length(*a) >= 5)
-	{
-		pa_or_pb(a, b);
-		pa_or_pb(a, b);
-		write(1, "pb\n", 3);
-		write(1, "pb\n", 3);
-	}
-	else if (get_list_length(*a) >= 4)
-	{	
-		pa_or_pb(a, b);
-		write(1, "pb\n", 3);
-	}
-}
 
-int	find_index(t_list *stack, int num)
-{
-	int index;
-
-	index = 0;
-	while (stack->data != num)
-	{
-		stack = stack->next;
-		index++;
-	}
-	return (index);
-}
-
-int	find_nearest(t_list *head, int num)
-{
-	t_list	*current;
-
-	while(1)
-	{
-		num--;
-		current = head;
-		while(current->next != head)
-		{	
-			if (current->data == num)
-				return (num);
-			current = current->next;
-		}
-		if (current->data == num)
-			return (num);
-	}
-}
 
 void	find_min_score(t_list *a, t_list *b, int *num)
 {
@@ -96,9 +50,9 @@ void	find_min_score(t_list *a, t_list *b, int *num)
 						current_b = current_b->next;
 					else
 						current_b = current_b->prev;
+					score++;
 					if (score >= min_score && min_score != -1)
 						break;
-					score++;
 				}
 				if (min_score > score || min_score == -1)
 				{
@@ -108,7 +62,7 @@ void	find_min_score(t_list *a, t_list *b, int *num)
 			}
 			else
 			{
-				while (!(current_a->data > current_b->data && current_a->data < current_b->prev->data)) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
+				while (!(current_a->data > current_b->data && current_a->data < current_b->prev->data))
 				{	
 					if (find_index(b, find_nearest(b, current_a->data)) < get_list_length(b) / 2)
 						current_b = current_b->next;
@@ -133,65 +87,46 @@ void	find_min_score(t_list *a, t_list *b, int *num)
 
 void	rotate_push(t_list	**a, t_list	**b, int num)
 {
-	if (num > find_max(*b) || num < find_min(*b)) //если нужное число в *a больше или меньше макс/мин в *b, то его надо поместить над макс
+	if (num > find_max(*b) || num < find_min(*b))
 	{
-		while ((*b)->data != find_max(*b) && (*a)->data != num) //крутим *b и *a пока там вверху не станет макс и num
+		while ((*b)->data != find_max(*b) && (*a)->data != num)
 			if (find_index(*a, num) < get_list_length(*a) / 2)
 				rr(a, b);
 			else
 				rrr(a, b);
-		if((*b)->data == find_max(*b) && (*a)->data != num) //если b докрутили до нужного места, то продолжаем крутить только a
+		if((*b)->data == find_max(*b) && (*a)->data != num)
 			while((*a)->data != num)
 			{	
 				if (find_index(*a, num) < get_list_length(*a) / 2)
-				{
-					ra_or_rb(a);
-					write(1, "ra\n", 3);
-				}
+					ra_or_rb(a, "ra\n");
 				else
-				{	
-					rra_or_rrb(a);
-					write(1, "rra\n", 4);
-				}
+					rra_or_rrb(a, "rra\n");
 			}
-		else if((*b)->data != find_max(*b) && (*a)->data == num) //и наоборот
+		else if((*b)->data != find_max(*b) && (*a)->data == num)
 			while((*b)->data != find_max(*b))
 			{
 				if (find_index(*b, find_max(*b)) < get_list_length(*b) / 2)
-				{	
-					ra_or_rb(b);
-					write(1, "rb\n", 3);
-				}
+					ra_or_rb(b, "rb\n");
 				else
-				{
-					rra_or_rrb(b);
-					write(1, "rrb\n", 4);
-				}
+					rra_or_rrb(b, "rrb\n");
 			}
-		pa_or_pb(a, b);
-		write(1, "pb\n", 3);
+		pa_or_pb(a, b, "pb\n");
 	}
-	else //если нужное число в *a не больше и не меньше макс/мин в *b, значит его надо вставить куда-то внутрь *b
+	else
 	{
-		while (!(num > (*b)->data && num < (*b)->prev->data) && (*a)->data != num) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
+		while (!(num > (*b)->data && num < (*b)->prev->data) && (*a)->data != num)
 			if (find_index(*a, num) < get_list_length(*a) / 2)
 				rr(a, b);
 			else
 				rrr(a, b);
 		if((*a)->data == num)
 		{
-			while (!(num > (*b)->data && num < (*b)->prev->data)) //крутим пока не найдем нужное место (то есть пока верхнее число в *a не больше чем верхнее *b  и не меньше чем prev *b)
+			while (!(num > (*b)->data && num < (*b)->prev->data))
 			{	
 				if (find_index(*b, find_nearest(*b, num)) < get_list_length(*b) / 2)
-				{	
-					ra_or_rb(b);
-					write(1, "rb\n", 3);
-				}
+					ra_or_rb(b, "rb\n");
 				else
-				{
-					rra_or_rrb(b);
-					write(1, "rrb\n", 4);
-				}
+					rra_or_rrb(b, "rrb\n");
 			}
 		}
 		else if((*a)->data != num)
@@ -199,19 +134,12 @@ void	rotate_push(t_list	**a, t_list	**b, int num)
 			while ((*a)->data != num)
 			{
 				if (find_index(*a, num) < get_list_length(*a) / 2)
-				{	
-					ra_or_rb(a);
-					write(1, "ra\n", 3);
-				}
+					ra_or_rb(a, "ra\n");
 				else
-				{
-					rra_or_rrb(a);
-					write(1, "rra\n", 4);
-				}
+					rra_or_rrb(a, "rra\n");
 			}
 		}
-		pa_or_pb(a, b);
-		write(1, "pb\n", 3);
+		pa_or_pb(a, b, "pb\n");
 	}
 }
 
@@ -238,32 +166,19 @@ void	push_backto_a(t_list	**a, t_list	**b)
 			while ((*a)->data != find_min(*a))
 			{
 				if (find_index(*a, find_min(*a)) < get_list_length(*a) / 2)
-				{	
-					ra_or_rb(a);
-					write(1, "ra\n", 3);
-				}
+					ra_or_rb(a, "ra\n");
 				else
-				{	
-					rra_or_rrb(a);
-					write(1, "rra\n", 4);
-				}
+					rra_or_rrb(a, "rra\n");
 			}
 		else
 			while (!((*b)->data < (*a)->data && (*b)->data > (*a)->prev->data))
 			{	
 				if (find_index(*a, find_nearest(*a, (*b)->data)) < get_list_length(*a) / 2)
-				{	
-					ra_or_rb(a);
-					write(1, "ra\n", 3);
-				}
+					ra_or_rb(a, "ra\n");
 				else
-				{	
-					rra_or_rrb(a);
-					write(1, "rra\n", 4);
-				}
+					rra_or_rrb(a, "rra\n");
 			}
-		pa_or_pb(b, a);
-		write(1, "pa\n", 3);
+		pa_or_pb(b, a, "pa\n");
 	}
 }
 
@@ -275,14 +190,8 @@ void	sorting(t_list	**a, t_list	**b)
 	while ((*a)->data != find_min(*a))
 	{
 		if (find_index(*a, find_min(*a)) < get_list_length(*a) / 2)
-		{	
-			ra_or_rb(a);
-			write(1, "ra\n", 3);
-		}
+			ra_or_rb(a, "ra\n");
 		else
-		{	
-			rra_or_rrb(a);
-			write(1, "rra\n", 4);
-		}
+			rra_or_rrb(a, "rra\n");
 	}
 }

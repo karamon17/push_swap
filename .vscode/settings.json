@@ -48,6 +48,7 @@
 	"string_view": "c",
 	"vector": "c",
 	"ratio": "c",
-	"ostream": "c"
+	"ostream": "c",
+	"sstream": "c"
 }
 }

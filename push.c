@@ -56,7 +56,7 @@ void	push2(t_list **from, t_list **to, t_list **tmp)
 	}
 }
 
-void	pa_or_pb(t_list **from, t_list **to)
+void	pa_or_pb(t_list **from, t_list **to, char *str)
 {
 	t_list	*tmp;
 
@@ -71,9 +71,14 @@ void	pa_or_pb(t_list **from, t_list **to)
 		tmp->next = (*to);
 		(*to) = tmp;
 		(*from) = NULL;
+		write(1, str, ft_strlen(str));
 		return ;
 	}
 	if (push1(from, to, &tmp))
+	{
+		write(1, str, ft_strlen(str));
 		return ;
+	}
 	push2(from, to, &tmp);
+	write(1, str, ft_strlen(str));
 }

@@ -30,18 +30,21 @@ t_list	*ft_lstnew(int data);
 void	check_argumets(int argc, char **argv);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
-void	sa_or_sb(t_list **stack);
-void	ss(t_list **a, t_list **b);
-void	pa_or_pb(t_list **in, t_list **out);
-void	ra_or_rb(t_list **stack);
+void	sa_or_sb(t_list **stack, char *str);
+void	pa_or_pb(t_list **in, t_list **out, char *str);
+void	ra_or_rb(t_list **stack, char *str);
 void	rr(t_list **a, t_list **b);
-void	rra_or_rrb(t_list **stack);
+void	rra_or_rrb(t_list **stack, char *str);
 void	rrr(t_list **a, t_list **b);
 void	sorting(t_list	**a, t_list	**b);
 int		get_list_length(t_list *head);
-int	find_max(t_list *head);
+int		find_max(t_list *head);
 int		find_min(t_list *head);
 void	sort_three(t_list	**a);
 int		check_sort_stack(t_list	**a);
+size_t	ft_strlen(const char *str);
+void	push_2to_b(t_list	**a, t_list	**b);
+int		find_index(t_list *stack, int num);
+int		find_nearest(t_list *head, int num);
 
 #endif
