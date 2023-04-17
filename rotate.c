@@ -39,6 +39,7 @@ void	rr(t_list **a, t_list **b, int *count)
 		flag = 1;
 	}
 	(*count) += flag;
+	write(1, "rr\n", 3);
 }
 
 void	rra_or_rrb(t_list **stack, int *count)
@@ -68,4 +69,5 @@ void	rrr(t_list **a, t_list **b, int *count)
 		flag = 1;
 	}
 	(*count) += flag;
+	write(1, "rrr\n", 4);
 }
