@@ -12,13 +12,20 @@
 
 #include "push_swap.h"
 
-void	rotate_push_help2(t_list	**a, t_list	**b, int num)
+void	rotate_push_help2(t_list **a, t_list **b, int num)
 {
-	while (!(num > (*b)->data && num < (*b)->prev->data) && (*a)->data != num)
-	{	
-		if (find_index(*a, num) < get_list_length(*a) / 2)
+	if (find_index(*a, num) < get_list_length(*a) / 2 && \
+		find_index(*b, find_nearest(*b, num)) < get_list_length(*b) / 2)
+	{
+		while (!(num > (*b)->data && num < (*b)->prev->data) \
+			&& (*a)->data != num)
 			rr(a, b);
-		else
+	}
+	else if (find_index(*a, num) > get_list_length(*a) / 2 && \
+		find_index(*b, find_nearest(*b, num)) > get_list_length(*b) / 2)
+	{
+		while (!(num > (*b)->data && num < (*b)->prev->data) \
+			&& (*a)->data != num)
 			rrr(a, b);
 	}
 }
@@ -26,25 +33,19 @@ void	rotate_push_help2(t_list	**a, t_list	**b, int num)
 void	rotate_push(t_list	**a, t_list	**b, int num)
 {
 	rotate_push_help2(a, b, num);
-	if ((*a)->data == num)
-	{	
-		while (!(num > (*b)->data && num < (*b)->prev->data))
-		{
-			if (find_index(*b, find_nearest(*b, num)) < get_list_length(*b) / 2)
-				ra_or_rb(b, "rb\n");
-			else
-				rra_or_rrb(b, "rrb\n");
-		}
+	while (!(num > (*b)->data && num < (*b)->prev->data))
+	{
+		if (find_index(*b, find_nearest(*b, num)) < get_list_length(*b) / 2)
+			ra_or_rb(b, "rb\n");
+		else
+			rra_or_rrb(b, "rrb\n");
 	}
-	else if ((*a)->data != num)
-	{	
-		while ((*a)->data != num)
-		{
-			if (find_index(*a, num) < get_list_length(*a) / 2)
-				ra_or_rb(a, "ra\n");
-			else
-				rra_or_rrb(a, "rra\n");
-		}
+	while ((*a)->data != num)
+	{
+		if (find_index(*a, num) < get_list_length(*a) / 2)
+			ra_or_rb(a, "ra\n");
+		else
+			rra_or_rrb(a, "rra\n");
 	}
 	pa_or_pb(a, b, "pb\n");
 }

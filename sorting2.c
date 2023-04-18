@@ -99,7 +99,7 @@ int	check_sort_stack(t_list	**a)
 	t_list	*current1;
 
 	current = *a;
-	while(current->data != find_min(*a))
+	while (current->data != find_min(*a))
 		current = current->next;
 	current1 = current;
 	while (current1->next != current)

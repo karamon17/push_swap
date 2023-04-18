@@ -7,7 +7,7 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
-      "args": ["89", "37", "45", "12", "54", "98", "21", "65", "76", "31", "24", "10", "52", "80", "96", "42", "67", "50", "73", "18"],
+      "args": ["42", "13", "87", "31", "29", "95", "72", "26", "18", "63", "53", "38", "61", "76", "84", "23", "79", "57", "50", "71"],
       "cwd": "/Users/gkhaishb/Desktop/push_swap",
       "program": "/Users/gkhaishb/Desktop/push_swap/a.out"
     }
