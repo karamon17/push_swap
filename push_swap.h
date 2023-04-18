@@ -18,11 +18,22 @@
 # include <limits.h>
 # include <stdio.h>
 
-typedef struct s_list {
+typedef struct s_list
+{
 	int				data;
 	struct s_list	*next;
 	struct s_list	*prev;
 }						t_list;
+
+typedef struct s_score
+{
+	int		min_score;
+	int		score;
+	int		i;
+	int		j;
+	t_list	*current_b;
+	t_list	*current_a;
+}						t_score;
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(int arg);
@@ -46,5 +57,9 @@ size_t	ft_strlen(const char *str);
 void	push_2to_b(t_list	**a, t_list	**b);
 int		find_index(t_list *stack, int num);
 int		find_nearest(t_list *head, int num);
+void	current_nearest(t_list *b, int *num, t_score *find);
+void	current_maxmin(t_list *b, int *num, t_score *find);
+void	find_min_score(t_list *a, t_list *b, int *num, t_score *find);
+void	rotate_push_minmax(t_list	**a, t_list	**b, int num);
 
 #endif

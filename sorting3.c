@@ -25,7 +25,7 @@ void	push_2to_b(t_list	**a, t_list	**b)
 
 int	find_index(t_list *stack, int num)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (stack->data != num)
@@ -40,11 +40,11 @@ int	find_nearest(t_list *head, int num)
 {
 	t_list	*current;
 
-	while(1)
+	while (1)
 	{
 		num--;
 		current = head;
-		while(current->next != head)
+		while (current->next != head)
 		{	
 			if (current->data == num)
 				return (num);

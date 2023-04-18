@@ -49,6 +49,9 @@
 	"vector": "c",
 	"ratio": "c",
 	"ostream": "c",
-	"sstream": "c"
+	"sstream": "c",
+	"__hash_table": "c",
+	"__string": "c",
+	"__tree": "c"
 }
 }
