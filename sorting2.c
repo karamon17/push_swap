@@ -96,13 +96,17 @@ void	sort_three(t_list	**a)
 int	check_sort_stack(t_list	**a)
 {
 	t_list	*current;
+	t_list	*current1;
 
 	current = *a;
-	while (current->next != *a)
-	{
-		if (current->data > current->next->data)
-			return (0);
+	while(current->data != find_min(*a))
 		current = current->next;
+	current1 = current;
+	while (current1->next != current)
+	{
+		if (current1->data > current1->next->data)
+			return (0);
+		current1 = current1->next;
 	}
 	return (1);
 }
