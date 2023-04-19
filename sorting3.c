@@ -45,7 +45,26 @@ int	find_nearest(t_list *head, int num)
 		num--;
 		current = head;
 		while (current->next != head)
-		{	
+		{
+			if (current->data == num)
+				return (num);
+			current = current->next;
+		}
+		if (current->data == num)
+			return (num);
+	}
+}
+
+int	find_nearest_bigger(t_list *head, int num)
+{
+	t_list	*current;
+
+	while (1)
+	{
+		num++;
+		current = head;
+		while (current->next != head)
+		{
 			if (current->data == num)
 				return (num);
 			current = current->next;

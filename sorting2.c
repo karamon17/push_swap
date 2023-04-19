@@ -93,16 +93,14 @@ void	sort_three(t_list	**a)
 		ra_or_rb(a, "ra\n");
 }
 
-int	check_sort_stack(t_list	**a)
+int	check_sort_stack(t_list	*head)
 {
-	t_list	*current;
 	t_list	*current1;
 
-	current = *a;
-	while (current->data != find_min(*a))
-		current = current->next;
-	current1 = current;
-	while (current1->next != current)
+	while (head->data != find_min(head))
+		head = head->next;
+	current1 = head;
+	while (current1->next != head)
 	{
 		if (current1->data > current1->next->data)
 			return (0);

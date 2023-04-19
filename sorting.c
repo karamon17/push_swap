@@ -64,10 +64,10 @@ void	push_allto_b(t_list	**a, t_list	**b)
 			rotate_push_minmax(a, b, num);
 		else
 			rotate_push(a, b, num);
-		if (check_sort_stack(a))
+		if (check_sort_stack(*a))
 			return ;
 	}
-	if (get_list_length(*a) == 3 && !check_sort_stack(a))
+	if (get_list_length(*a) == 3 && !check_sort_stack(*a))
 		sort_three(a);
 }
 
@@ -89,7 +89,7 @@ void	push_backto_a(t_list	**a, t_list	**b)
 		{	
 			while (!((*b)->data < (*a)->data && (*b)->data > (*a)->prev->data))
 			{	
-				if (find_index(*a, find_nearest(*a, (*b)->data)) \
+				if (find_index(*a, find_nearest_bigger(*a, (*b)->data)) \
 					< get_list_length(*a) / 2)
 					ra_or_rb(a, "ra\n");
 				else

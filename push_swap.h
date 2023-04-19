@@ -52,7 +52,7 @@ int		get_list_length(t_list *head);
 int		find_max(t_list *head);
 int		find_min(t_list *head);
 void	sort_three(t_list	**a);
-int		check_sort_stack(t_list	**a);
+int		check_sort_stack(t_list	*head);
 size_t	ft_strlen(const char *str);
 void	push_2to_b(t_list	**a, t_list	**b);
 int		find_index(t_list *stack, int num);
@@ -61,5 +61,6 @@ void	current_nearest(t_list *b, int *num, t_score *find);
 void	current_maxmin(t_list *b, int *num, t_score *find);
 void	find_min_score(t_list *a, t_list *b, int *num, t_score *find);
 void	rotate_push_minmax(t_list	**a, t_list	**b, int num);
+int		find_nearest_bigger(t_list *head, int num);
 
 #endif

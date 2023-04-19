@@ -21,7 +21,7 @@ void	check_duplicates(int *n, int current, int len)
 	{
 		if (n[i] == current)
 		{
-			write(1, "Error\n", 6);
+			write(2, "Error\n", 6);
 			free(n);
 			exit(0);
 		}
@@ -37,20 +37,23 @@ void	check_sort(int *n, int len)
 	while (i < len)
 	{
 		if (i > 0 && n[i] < n[i - 1])
+		{
+			free(n);
 			return ;
+		}
 		i++;
 	}
 	free(n);
 	exit(0);
 }
 
-void	check_argumets(int argc, char **arr)
+void	check_argumets(int count, char **arr)
 {
 	int	i;
 	int	j;
 	int	*n;
 
-	n = malloc(sizeof(int) * (argc - 1));
+	n = malloc(sizeof(int) * (count));
 	i = 0;
 	while (arr[i])
 	{
@@ -60,7 +63,7 @@ void	check_argumets(int argc, char **arr)
 			if ((j == 0 && !ft_isdigit(arr[i][j]) && arr[i][j] != '-')
 				|| (j > 0 && !ft_isdigit(arr[i][j])))
 			{
-				write(1, "Error\n", 6);
+				write(2, "Error\n", 6);
 				free(n);
 				exit(0);
 			}
@@ -70,5 +73,5 @@ void	check_argumets(int argc, char **arr)
 		check_duplicates(n, n[i], i);
 		i++;
 	}
-	check_sort(n, argc - 1);
+	check_sort(n, count);
 }

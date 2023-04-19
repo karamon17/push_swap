@@ -32,6 +32,38 @@ void	create_list(t_list	**a, char **arr)
 	(*a)->prev = cursor;
 }
 
+void	free_lst(t_list	*a)
+{
+	t_list	*current;
+
+	current = a;
+	while (current->next != a)
+	{
+		current = current->next;
+		free(current->prev);
+	}
+	free(current);
+}
+
+int	count_numbers(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		if (arr[i][0] == '-' && !arr[i][1])
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
+		i++;
+	}
+	if (i == 1)
+		exit(1);
+	return (i);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*a;
@@ -48,9 +80,15 @@ int	main(int argc, char **argv)
 	while (i < argc)
 		str = ft_strjoin(str, argv[i++]);
 	arr = ft_split(str, ' ');
-	check_argumets(argc, arr);
+	i = count_numbers(arr);
+	check_argumets(i, arr);
 	a = (t_list *)malloc(sizeof(t_list));
 	create_list(&a, arr);
 	b = NULL;
 	sorting(&a, &b);
+	free_lst(a);
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	return (0);
 }
