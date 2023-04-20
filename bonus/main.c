@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	create_list(t_list	**a, char **arr)
 {
@@ -59,7 +59,6 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-
 int	count_numbers(char **arr)
 {
 	int	i;
@@ -70,19 +69,15 @@ int	count_numbers(char **arr)
 		if (arr[i][0] == '-' && !arr[i][1])
 		{
 			write(2, "Error\n", 6);
-			free_arr(arr);
 			exit(1);
 		}
 		i++;
 	}
 	if (i == 1)
-	{
-		free_arr(arr);	
 		exit(1);
-	}
 	return (i);
 }
-
+#include <stdio.h>
 int	main(int argc, char **argv)
 {
 	t_list	*a;
@@ -107,6 +102,6 @@ int	main(int argc, char **argv)
 	sorting(&a, &b);
 	free_lst(a);
 	free_arr(arr);
-	system("leaks push_swap");
+	system("leaks checker");
 	return (0);
 }

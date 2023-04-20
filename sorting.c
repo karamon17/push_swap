@@ -102,9 +102,12 @@ void	push_backto_a(t_list	**a, t_list	**b)
 
 void	sorting(t_list	**a, t_list	**b)
 {
-	push_2to_b(a, b);
-	push_allto_b(a, b);
-	push_backto_a(a, b);
+	if (!check_sort_stack(*a))
+	{
+		push_2to_b(a, b);
+		push_allto_b(a, b);
+		push_backto_a(a, b);
+	}
 	while ((*a)->data != find_min(*a))
 	{
 		if (find_index(*a, find_min(*a)) < get_list_length(*a) / 2)

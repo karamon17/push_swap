@@ -52,6 +52,7 @@
 	"sstream": "c",
 	"__hash_table": "c",
 	"__string": "c",
-	"__tree": "c"
+	"__tree": "c",
+	"checker.h": "c"
 }
 }

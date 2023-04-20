@@ -12,27 +12,43 @@
 
 NAME = push_swap
 
+NAME2 = checker
+
 SRCS = $(wildcard *.c)
+
+SRCS2 = $(addprefix ./bonus/,main.c check_arguments.c ft_split.c get_next_line.c get_next_line_utils.c libft.c push.c rotate.c sorting.c swap.c)
 
 OBJS = $(SRCS:.c=.o)
 
+OBJS2 = $(SRCS2:.c=.o)
+
 HEADER = push_swap.h
 
-FLAGS = -Wall -Wextra -Werror
+HEADER2 = bonus/checker.h
 
-all: $(NAME)
+HEADER_GNL = bonus/get_next_line.h
 
-%.o: %.c $(HEADER)
+FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+
+all: $(NAME) $(NAME2)
+
+%.o: %.c $(HEADER) $(HEADER2)
 	cc $(FLAGS) -c $< -o $@
 
 $(NAME): $(HEADER) $(OBJS)
 	cc $(FLAGS) $(OBJS) -o $(NAME)
 
+$(NAME2): $(HEADER2) $(HEADER_GNL) $(OBJS2)
+	echo $(SRCS2)
+	cc $(FLAGS) $(OBJS2) -o $(NAME2)
+
 clean:
 	rm -f $(OBJS)
+	rm -f $(OBJS2)
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(NAME2)
 
 re: fclean all
 
