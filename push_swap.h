@@ -62,5 +62,7 @@ void	find_min_score(t_list *a, t_list *b, int *num, t_score *find);
 void	rotate_push_minmax(t_list	**a, t_list	**b, int num);
 int		find_nearest_bigger(t_list *head, int num);
 void	free_arr(char **arr);
+void	error(t_list *a, t_list *b, char **arr);
+void	free_lst(t_list	*a);
 
 #endif

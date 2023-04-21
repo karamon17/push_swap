@@ -68,38 +68,43 @@ int	check_sort_stack(t_list	*head, t_list *b)
 	return (1);
 }
 
-void	sorting_help(char *line, t_list	**a, t_list	**b)
+void	sorting_help(char *line, t_list	**a, t_list	**b, char **arr)
 {
-	if (line[0] == 's' && line[1] == 'a')
+	if (line[0] == 's' && line[1] == 'a' && line[2] == '\n')
 		sa_or_sb(a);
-	else if (line[0] == 's' && line[1] == 'b')
+	else if (line[0] == 's' && line[1] == 'b' && line[2] == '\n')
 		sa_or_sb(b);
-	else if (line[0] == 'p' && line[1] == 'a')
+	else if (line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
 		pa_or_pb(b, a);
-	else if (line[0] == 'p' && line[1] == 'b')
+	else if (line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
 		pa_or_pb(a, b);
-	else if (line[0] == 'r' && line[1] == 'a')
+	else if (line[0] == 'r' && line[1] == 'a' && line[2] == '\n')
 		ra_or_rb(a);
-	else if (line[0] == 'r' && line[1] == 'b')
+	else if (line[0] == 'r' && line[1] == 'b' && line[2] == '\n')
 		ra_or_rb(b);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'a')
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'a' \
+		&& line[3] == '\n')
 		rra_or_rrb(a);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b')
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b' \
+		&& line[3] == '\n')
 		rra_or_rrb(b);
 	else if (line[0] == 'r' && line[1] == 'r' && line[2] == '\n')
 		rr(a, b);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r')
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r' \
+		&& line[3] == '\n')
 		rrr(a, b);
+	else
+		error(*a, *b, arr);
 }
 
-void	sorting(t_list	**a, t_list	**b)
+void	sorting(t_list	**a, t_list	**b, char **arr)
 {
 	char	*line;
 
 	line = get_next_line(0);
 	while (line > 0)
 	{
-		sorting_help(line, a, b);
+		sorting_help(line, a, b, arr);
 		free(line);
 		line = get_next_line(0);
 	}

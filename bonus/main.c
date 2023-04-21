@@ -35,6 +35,8 @@ void	free_lst(t_list	*a)
 {
 	t_list	*current;
 
+	if (!a)
+		return ;
 	current = a;
 	while (current->next != a)
 	{
@@ -62,19 +64,25 @@ void	free_arr(char **arr)
 int	count_numbers(char **arr)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (arr[i])
-	{
+	i = -1;
+	j = 0;
+	while (arr[++i])
 		if (arr[i][0] == '-' && !arr[i][1])
-		{
-			write(2, "Error\n", 6);
-			exit(1);
-		}
-		i++;
+			error(NULL, NULL, arr);
+	while (arr[0][j])
+	{	
+		if ((j == 0 && !ft_isdigit(arr[0][j]) && arr[0][j] != '-')
+			|| (j > 0 && !ft_isdigit(arr[0][j])))
+			error(NULL, NULL, arr);
+		j++;
 	}
 	if (i == 1)
+	{
+		free_arr(arr);
 		exit(1);
+	}
 	return (i);
 }
 
@@ -98,7 +106,7 @@ int	main(int argc, char **argv)
 	check_argumets(i, arr);
 	create_list(&a, arr);
 	b = NULL;
-	sorting(&a, &b);
+	sorting(&a, &b, arr);
 	free_lst(a);
 	free_arr(arr);
 	return (0);

@@ -77,3 +77,12 @@ void	check_argumets(int count, char **arr)
 	}
 	check_sort(n, count, arr);
 }
+
+void	error(t_list *a, t_list *b, char **arr)
+{
+	write(2, "Error\n", 6);
+	free_arr(arr);
+	free_lst(a);
+	free_lst(b);
+	exit(1);
+}
