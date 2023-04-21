@@ -12,7 +12,7 @@
 
 NAME = push_swap
 
-NAME2 = checker
+NAME2 = bonus
 
 SRCS = $(wildcard *.c)
 
@@ -40,7 +40,7 @@ $(NAME): $(HEADER) $(OBJS)
 
 $(NAME2): $(HEADER2) $(HEADER_GNL) $(OBJS2)
 	echo $(SRCS2)
-	cc $(FLAGS) $(OBJS2) -o $(NAME2)
+	cc $(FLAGS) $(OBJS2) -o checker
 
 clean:
 	rm -f $(OBJS)
@@ -48,7 +48,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(NAME2)
+	rm -f checker
 
 re: fclean all
 
