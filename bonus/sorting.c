@@ -56,8 +56,6 @@ int	check_sort_stack(t_list	*head, t_list *b)
 
 	if (get_list_length(b))
 		return (0);
-	while (head->data != find_min(head))
-		head = head->next;
 	current1 = head;
 	while (current1->next != head)
 	{
