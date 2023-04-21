@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands3.c                                        :+:      :+:    :+:   */
+/*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkhaishb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 18:19:53 by gkhaishb          #+#    #+#             */
-/*   Updated: 2023/04/10 18:19:54 by gkhaishb         ###   ########.fr       */
+/*   Created: 2023/04/21 15:17:33 by gkhaishb          #+#    #+#             */
+/*   Updated: 2023/04/21 15:17:35 by gkhaishb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	sorting_help(char *line, t_list	**a, t_list	**b)
 		rra_or_rrb(a);
 	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b')
 		rra_or_rrb(b);
-	else if (line[0] == 'r' && line[1] == 'r' && !line[2])
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == '\n')
 		rr(a, b);
 	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r')
 		rrr(a, b);
