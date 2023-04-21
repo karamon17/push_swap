@@ -77,7 +77,7 @@ int	count_numbers(char **arr)
 		exit(1);
 	return (i);
 }
-#include <stdio.h>
+
 int	main(int argc, char **argv)
 {
 	t_list	*a;
@@ -96,12 +96,10 @@ int	main(int argc, char **argv)
 	arr = ft_split(str, ' ');
 	i = count_numbers(arr);
 	check_argumets(i, arr);
-	a = (t_list *)malloc(sizeof(t_list));
 	create_list(&a, arr);
 	b = NULL;
 	sorting(&a, &b);
 	free_lst(a);
 	free_arr(arr);
-	system("leaks checker");
 	return (0);
 }

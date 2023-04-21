@@ -56,8 +56,8 @@ void	check_argumets(int count, char **arr)
 	int	*n;
 
 	n = malloc(sizeof(int) * (count));
-	i = 0;
-	while (arr[i])
+	i = -1;
+	while (arr[++i])
 	{
 		j = 0;
 		while (arr[i][j])
@@ -74,7 +74,6 @@ void	check_argumets(int count, char **arr)
 		}
 		n[i] = ft_atoi(arr[i], arr);
 		check_duplicates(n, n[i], i, arr);
-		i++;
 	}
 	check_sort(n, count, arr);
 }

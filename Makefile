@@ -28,7 +28,7 @@ HEADER2 = bonus/checker.h
 
 HEADER_GNL = bonus/get_next_line.h
 
-FLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME) $(NAME2)
 

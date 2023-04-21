@@ -59,7 +59,6 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-
 int	count_numbers(char **arr)
 {
 	int	i;
@@ -77,7 +76,7 @@ int	count_numbers(char **arr)
 	}
 	if (i == 1)
 	{
-		free_arr(arr);	
+		free_arr(arr);
 		exit(1);
 	}
 	return (i);
@@ -101,12 +100,10 @@ int	main(int argc, char **argv)
 	arr = ft_split(str, ' ');
 	i = count_numbers(arr);
 	check_argumets(i, arr);
-	a = (t_list *)malloc(sizeof(t_list));
 	create_list(&a, arr);
 	b = NULL;
 	sorting(&a, &b);
 	free_lst(a);
 	free_arr(arr);
-	system("leaks push_swap");
 	return (0);
 }

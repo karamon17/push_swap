@@ -68,36 +68,41 @@ int	check_sort_stack(t_list	*head, t_list *b)
 	return (1);
 }
 
+void	sorting_help(char *line, t_list	**a, t_list	**b)
+{
+	if (line[0] == 's' && line[1] == 'a')
+		sa_or_sb(a);
+	else if (line[0] == 's' && line[1] == 'b')
+		sa_or_sb(b);
+	else if (line[0] == 'p' && line[1] == 'a')
+		pa_or_pb(b, a);
+	else if (line[0] == 'p' && line[1] == 'b')
+		pa_or_pb(a, b);
+	else if (line[0] == 'r' && line[1] == 'a')
+		ra_or_rb(a);
+	else if (line[0] == 'r' && line[1] == 'b')
+		ra_or_rb(b);
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'a')
+		rra_or_rrb(a);
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b')
+		rra_or_rrb(b);
+	else if (line[0] == 'r' && line[1] == 'r' && !line[2])
+		rr(a, b);
+	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r')
+		rrr(a, b);
+}
+
 void	sorting(t_list	**a, t_list	**b)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(0);
-    while (line > 0)
-    {
-        if (line[0] == 's' && line[1] == 'a')
-			sa_or_sb(a);
-		else if (line[0] == 's' && line[1] == 'b')
-			sa_or_sb(b);
-		else if (line[0] == 'p' && line[1] == 'a')
-			pa_or_pb(b, a);
-		else if (line[0] == 'p' && line[1] == 'b')
-			pa_or_pb(a, b);
-		else if (line[0] == 'r' && line[1] == 'a')
-			ra_or_rb(a);
-		else if (line[0] == 'r' && line[1] == 'b')
-			ra_or_rb(b);
-		else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'a')
-			rra_or_rrb(a);
-		else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b')
-			rra_or_rrb(b);
-		else if (line[0] == 'r' && line[1] == 'r' && !line[2])
-			rr(a, b);
-		else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r')
-			rrr(a, b);
-        free(line);
+	while (line > 0)
+	{
+		sorting_help(line, a, b);
+		free(line);
 		line = get_next_line(0);
-    }
+	}
 	if (line)
 		free(line);
 	if (check_sort_stack(*a, *b))

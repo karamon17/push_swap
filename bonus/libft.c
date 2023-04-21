@@ -77,7 +77,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (0);
-	res = (char *)malloc((ft_strlen_checker(s1) + ft_strlen_checker(s2) + 2) * sizeof(char));
+	res = (char *)malloc((ft_strlen_checker(s1) + \
+		ft_strlen_checker(s2) + 2) * sizeof(char));
 	if (!res)
 		return (0);
 	while (s1[i])
