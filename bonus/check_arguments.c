@@ -30,25 +30,6 @@ void	check_duplicates(int *n, int current, int len, char **arr)
 	}
 }
 
-void	check_sort(int *n, int len, char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (i > 0 && n[i] < n[i - 1])
-		{
-			free(n);
-			return ;
-		}
-		i++;
-	}
-	free(n);
-	free_arr(arr);
-	exit(1);
-}
-
 void	check_argumets(int count, char **arr)
 {
 	int	i;
@@ -75,7 +56,6 @@ void	check_argumets(int count, char **arr)
 		n[i] = ft_atoi(arr[i], arr);
 		check_duplicates(n, n[i], i, arr);
 	}
-	check_sort(n, count, arr);
 }
 
 void	error(t_list *a, t_list *b, char **arr)
