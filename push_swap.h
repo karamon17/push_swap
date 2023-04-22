@@ -64,5 +64,6 @@ int		find_nearest_bigger(t_list *head, int num);
 void	free_arr(char **arr);
 void	error(t_list *a, t_list *b, char **arr);
 void	free_lst(t_list	*a);
+void	free_str(char *str);
 
 #endif

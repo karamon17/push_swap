@@ -46,7 +46,7 @@ void	ra_or_rb(t_list **stack);
 void	rr(t_list **a, t_list **b);
 void	rra_or_rrb(t_list **stack);
 void	rrr(t_list **a, t_list **b);
-void	sorting(t_list	**a, t_list	**b, char **arr);
+void	sorting(t_list	**a, t_list	**b);
 int		get_list_length(t_list *head);
 int		find_max(t_list *head);
 int		find_min(t_list *head);
@@ -62,5 +62,8 @@ int		find_nearest_bigger(t_list *head, int num);
 void	free_arr(char **arr);
 void	error(t_list *a, t_list *b, char **arr);
 void	free_lst(t_list	*a);
+void	ss(t_list **a, t_list **b);
+size_t	ft_strlen(const char *str);
+void	free_str(char *str);
 
 #endif

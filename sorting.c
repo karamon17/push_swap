@@ -115,4 +115,5 @@ void	sorting(t_list	**a, t_list	**b)
 		else
 			rra_or_rrb(a, "rra\n");
 	}
+	free_lst(*a);
 }

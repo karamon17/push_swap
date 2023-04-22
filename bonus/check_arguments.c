@@ -66,3 +66,10 @@ void	error(t_list *a, t_list *b, char **arr)
 	free_lst(b);
 	exit(1);
 }
+
+void	free_str(char *str)
+{
+	free(str);
+	write(2, "Error\n", 6);
+	exit(1);
+}

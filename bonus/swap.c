@@ -31,3 +31,11 @@ void	sa_or_sb(t_list **stack)
 	if (*stack && (*stack)->next)
 		swap(stack);
 }
+
+void	ss(t_list **a, t_list **b)
+{
+	if (*a && (*a)->next)
+		swap(a);
+	if (*b && (*b)->next)
+		swap(b);
+}

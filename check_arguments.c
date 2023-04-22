@@ -46,7 +46,7 @@ void	check_sort(int *n, int len, char **arr)
 	}
 	free(n);
 	free_arr(arr);
-	exit(1);
+	exit(0);
 }
 
 void	check_argumets(int count, char **arr)
@@ -84,5 +84,12 @@ void	error(t_list *a, t_list *b, char **arr)
 	free_arr(arr);
 	free_lst(a);
 	free_lst(b);
+	exit(1);
+}
+
+void	free_str(char *str)
+{
+	free(str);
+	write(2, "Error\n", 6);
 	exit(1);
 }

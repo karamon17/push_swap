@@ -66,43 +66,42 @@ int	check_sort_stack(t_list	*head, t_list *b)
 	return (1);
 }
 
-void	sorting_help(char *line, t_list	**a, t_list	**b, char **arr)
+void	sorting_help(char *l, t_list **a, t_list **b)
 {
-	if (line[0] == 's' && line[1] == 'a' && line[2] == '\n')
+	if (l[0] == 's' && l[1] == 'a' && l[2] == '\n')
 		sa_or_sb(a);
-	else if (line[0] == 's' && line[1] == 'b' && line[2] == '\n')
+	else if (l[0] == 's' && l[1] == 'b' && l[2] == '\n')
 		sa_or_sb(b);
-	else if (line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
+	else if (l[0] == 's' && l[1] == 's' && l[2] == '\n')
+		ss(a, b);
+	else if (l[0] == 'p' && l[1] == 'a' && l[2] == '\n')
 		pa_or_pb(b, a);
-	else if (line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
+	else if (l[0] == 'p' && l[1] == 'b' && l[2] == '\n')
 		pa_or_pb(a, b);
-	else if (line[0] == 'r' && line[1] == 'a' && line[2] == '\n')
+	else if (l[0] == 'r' && l[1] == 'a' && l[2] == '\n')
 		ra_or_rb(a);
-	else if (line[0] == 'r' && line[1] == 'b' && line[2] == '\n')
+	else if (l[0] == 'r' && l[1] == 'b' && l[2] == '\n')
 		ra_or_rb(b);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'a' \
-		&& line[3] == '\n')
+	else if (l[0] == 'r' && l[1] == 'r' && l[2] == 'a' && l[3] == '\n')
 		rra_or_rrb(a);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b' \
-		&& line[3] == '\n')
+	else if (l[0] == 'r' && l[1] == 'r' && l[2] == 'b' && l[3] == '\n')
 		rra_or_rrb(b);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == '\n')
+	else if (l[0] == 'r' && l[1] == 'r' && l[2] == '\n')
 		rr(a, b);
-	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r' \
-		&& line[3] == '\n')
+	else if (l[0] == 'r' && l[1] == 'r' && l[2] == 'r' && l[3] == '\n')
 		rrr(a, b);
 	else
-		error(*a, *b, arr);
+		error(*a, *b, NULL);
 }
 
-void	sorting(t_list	**a, t_list	**b, char **arr)
+void	sorting(t_list	**a, t_list	**b)
 {
 	char	*line;
 
 	line = get_next_line(0);
 	while (line > 0)
 	{
-		sorting_help(line, a, b, arr);
+		sorting_help(line, a, b);
 		free(line);
 		line = get_next_line(0);
 	}
@@ -112,4 +111,5 @@ void	sorting(t_list	**a, t_list	**b, char **arr)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
+	free_lst(*a);
 }

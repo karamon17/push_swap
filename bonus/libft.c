@@ -33,7 +33,7 @@ int	ft_atoi(const char *str, char **arr)
 		if (res * sign > INT_MAX || res * sign < INT_MIN)
 		{
 			write(2, "Error\n", 6);
-			free(arr);
+			free_arr(arr);
 			exit(1);
 		}
 	}

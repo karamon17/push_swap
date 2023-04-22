@@ -29,6 +29,7 @@ void	create_list(t_list	**a, char **arr)
 	}
 	cursor->next = *a;
 	(*a)->prev = cursor;
+	free_arr(arr);
 }
 
 void	free_lst(t_list	*a)
@@ -81,7 +82,7 @@ int	count_numbers(char **arr)
 	if (i == 1)
 	{
 		free_arr(arr);
-		exit(1);
+		exit(0);
 	}
 	return (i);
 }
@@ -95,19 +96,21 @@ int	main(int argc, char **argv)
 	int		i;
 
 	if (argc == 1)
-		exit(1);
+		exit(0);
 	i = 1;
 	str = malloc(sizeof(char));
 	str[0] = 0;
 	while (i < argc)
+	{
+		if (argv[i][0] == 0)
+			free_str(str);
 		str = ft_strjoin(str, argv[i++]);
+	}
 	arr = ft_split(str, ' ');
 	i = count_numbers(arr);
 	check_argumets(i, arr);
 	create_list(&a, arr);
 	b = NULL;
 	sorting(&a, &b);
-	free_lst(a);
-	free_arr(arr);
 	return (0);
 }
