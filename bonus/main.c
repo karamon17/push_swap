@@ -65,20 +65,11 @@ void	free_arr(char **arr)
 int	count_numbers(char **arr)
 {
 	int	i;
-	int	j;
 
 	i = -1;
-	j = 0;
 	while (arr[++i])
 		if (arr[i][0] == '-' && !arr[i][1])
 			error(NULL, NULL, arr);
-	while (arr[0][j])
-	{	
-		if ((j == 0 && !ft_isdigit(arr[0][j]) && arr[0][j] != '-')
-			|| (j > 0 && !ft_isdigit(arr[0][j])))
-			error(NULL, NULL, arr);
-		j++;
-	}
 	return (i);
 }
 
