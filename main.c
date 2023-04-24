@@ -79,6 +79,7 @@ int	count_numbers(char **arr)
 			error(NULL, NULL, arr);
 		j++;
 	}
+	check_argumets(i, arr);
 	if (i == 1)
 	{
 		free_arr(arr);
@@ -108,7 +109,6 @@ int	main(int argc, char **argv)
 	}
 	arr = ft_split(str, ' ');
 	i = count_numbers(arr);
-	check_argumets(i, arr);
 	create_list(&a, arr);
 	b = NULL;
 	sorting(&a, &b);
