@@ -37,7 +37,6 @@ $(NAME): $(HEADER) $(OBJS)
 	cc $(FLAGS) $(OBJS) -o $(NAME)
 
 bonus: $(HEADER2) $(HEADER_GNL) $(OBJS2)
-	echo $(SRCS2)
 	cc $(FLAGS) $(OBJS2) -o checker
 
 clean:
