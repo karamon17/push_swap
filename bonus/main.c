@@ -32,36 +32,6 @@ void	create_list(t_list	**a, char **arr)
 	free_arr(arr);
 }
 
-void	free_lst(t_list	*a)
-{
-	t_list	*current;
-
-	if (!a)
-		return ;
-	current = a;
-	while (current->next != a)
-	{
-		current = current->next;
-		free(current->prev);
-	}
-	free(current);
-}
-
-void	free_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-	{	
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
 int	count_numbers(char **arr)
 {
 	int	i;
@@ -88,8 +58,7 @@ int	main(int argc, char **argv)
 	str[0] = 0;
 	while (i < argc)
 	{
-		if (argv[i][0] == 0)
-			free_str(str);
+		check_str(argv[i], str);
 		str = ft_strjoin(str, argv[i++]);
 	}
 	arr = ft_split(str, ' ');

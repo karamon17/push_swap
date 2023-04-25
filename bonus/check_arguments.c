@@ -30,6 +30,19 @@ void	check_duplicates(int *n, int current, int len, char **arr)
 	}
 }
 
+void	check_str(char *ar, char *str)
+{
+	int	i;
+
+	i = 0;
+	if (ar[0] == 0)
+		free_str(str);
+	while (ar[i] == ' ')
+		i++;
+	if (ar[i] == 0)
+		free_str(str);
+}
+
 void	check_argumets(int count, char **arr)
 {
 	int	i;
@@ -56,20 +69,4 @@ void	check_argumets(int count, char **arr)
 		n[i] = ft_atoi(arr[i], arr);
 		check_duplicates(n, n[i], i, arr);
 	}
-}
-
-void	error(t_list *a, t_list *b, char **arr)
-{
-	write(2, "Error\n", 6);
-	free_arr(arr);
-	free_lst(a);
-	free_lst(b);
-	exit(1);
-}
-
-void	free_str(char *str)
-{
-	free(str);
-	write(2, "Error\n", 6);
-	exit(1);
 }

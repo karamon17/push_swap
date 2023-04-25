@@ -65,5 +65,6 @@ void	free_lst(t_list	*a);
 void	ss(t_list **a, t_list **b);
 size_t	ft_strlen(const char *str);
 void	free_str(char *str);
+void	check_str(char *ar, char *str);
 
 #endif
