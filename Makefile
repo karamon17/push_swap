@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME = push_swap
+NAME_CH = checker
 
 SRCS = $(wildcard *.c)
 
@@ -36,8 +37,10 @@ all: $(NAME)
 $(NAME): $(HEADER) $(OBJS)
 	cc $(FLAGS) $(OBJS) -o $(NAME)
 
-bonus: $(HEADER2) $(HEADER_GNL) $(OBJS2)
-	cc $(FLAGS) $(OBJS2) -o checker
+bonus: $(NAME_CH)
+
+$(NAME_CH): $(HEADER2) $(HEADER_GNL) $(OBJS2)
+			cc $(FLAGS) $(OBJS2) -o $(NAME_CH)
 
 clean:
 	rm -f $(OBJS)
@@ -45,7 +48,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f checker
+	rm -f $(NAME_CH)
 
 re: fclean all
 
